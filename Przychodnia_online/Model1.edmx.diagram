@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0ef2bbc15c324f96b7efce800db30161" Name="Diagram1">
+        <EntityTypeShape EntityType="PrzychodniaModel.CHOROBY" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrzychodniaModel.KARTAPACJENTA" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrzychodniaModel.LEK" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrzychodniaModel.LEKARZ" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrzychodniaModel.PACJENT" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrzychodniaModel.RECEPTA" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrzychodniaModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrzychodniaModel.WIZYTA" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="PrzychodniaModel.FK_CHOROBY_CHOROBY_W_WIZYTA" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.FK_KARTAPAC_PACJENT_K_PACJENT" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.FK_PACJENT_PACJENT_K_KARTAPAC" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.FK_WIZYTA_WIZYTA_KA_KARTAPAC" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.FK_RECEPTA_LEKARZ_RE_LEKARZ" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.FK_WIZYTA_LEKARZ_WI_LEKARZ" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.FK_RECEPTA_PACJENT_R_PACJENT" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.FK_WIZYTA_PACJENRT__PACJENT" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.LEK_KARTA" ManuallyRouted="false" />
+        <AssociationConnector Association="PrzychodniaModel.LEK_RECEPTA" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
