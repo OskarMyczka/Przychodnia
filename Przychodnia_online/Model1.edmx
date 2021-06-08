@@ -1,0 +1,715 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PrzychodniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CHOROBY">
+          <Key>
+            <PropertyRef Name="ID_CHOROBY" />
+          </Key>
+          <Property Name="ID_CHOROBY" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_WIZYTA" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CHO_NAZWA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PRZEWLEKLA" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KARTAPACJENTA">
+          <Key>
+            <PropertyRef Name="ID_KARTAPACJENTA" />
+          </Key>
+          <Property Name="ID_KARTAPACJENTA" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACJENT" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="GRUPAKRWI" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LEK">
+          <Key>
+            <PropertyRef Name="ID_LEK" />
+          </Key>
+          <Property Name="ID_LEK" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAZWA" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ROZMIAR" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LEK_KARTA">
+          <Key>
+            <PropertyRef Name="ID_KARTAPACJENTA" />
+            <PropertyRef Name="ID_LEK" />
+          </Key>
+          <Property Name="ID_KARTAPACJENTA" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ID_LEK" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LEK_RECEPTA">
+          <Key>
+            <PropertyRef Name="ID_RECEPTA" />
+            <PropertyRef Name="ID_LEK" />
+          </Key>
+          <Property Name="ID_RECEPTA" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ID_LEK" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LEKARZ">
+          <Key>
+            <PropertyRef Name="ID_LEKARZ" />
+          </Key>
+          <Property Name="ID_LEKARZ" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LEK_IMIE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="LEK_NAZWISKO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LEK_DATAUR" Type="datetime" Nullable="false" />
+          <Property Name="LEK_PESEL" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="LEK_NRTELEFONU" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="LEK_MAIL" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LEK_ADRES" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="LEK_HASLO" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PACJENT">
+          <Key>
+            <PropertyRef Name="ID_PACJENT" />
+          </Key>
+          <Property Name="ID_PACJENT" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_KARTAPACJENTA" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="PAC_IMIE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PAC_NAZWISKO" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PAC_DATAUR" Type="datetime" Nullable="false" />
+          <Property Name="PAC_PESEL" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="PAC_NRTELEFONU" Type="numeric" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="PAC_MAIL" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="PAC_ADRES" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PAC_HASLO" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RECEPTA">
+          <Key>
+            <PropertyRef Name="ID_RECEPTA" />
+          </Key>
+          <Property Name="ID_RECEPTA" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_LEKARZ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ID_PACJENT" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DATAWYSTAWIENIA" Type="datetime" Nullable="false" />
+          <Property Name="REC_OPIS" Type="varchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="WIZYTA">
+          <Key>
+            <PropertyRef Name="ID_WIZYTA" />
+          </Key>
+          <Property Name="ID_WIZYTA" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PACJENT" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ID_KARTAPACJENTA" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ID_LEKARZ" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DATA" Type="datetime" Nullable="false" />
+          <Property Name="WIZ_OPIS" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CHOROBY_CHOROBY_W_WIZYTA">
+          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="0..1" />
+          <End Role="CHOROBY" Type="Self.CHOROBY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WIZYTA">
+              <PropertyRef Name="ID_WIZYTA" />
+            </Principal>
+            <Dependent Role="CHOROBY">
+              <PropertyRef Name="ID_WIZYTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KARTAPAC_PACJENT_K_PACJENT">
+          <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="0..1" />
+          <End Role="KARTAPACJENTA" Type="Self.KARTAPACJENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACJENT">
+              <PropertyRef Name="ID_PACJENT" />
+            </Principal>
+            <Dependent Role="KARTAPACJENTA">
+              <PropertyRef Name="ID_PACJENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LEK_KART_LEK_KARTA_KARTAPAC">
+          <End Role="KARTAPACJENTA" Type="Self.KARTAPACJENTA" Multiplicity="1" />
+          <End Role="LEK_KARTA" Type="Self.LEK_KARTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KARTAPACJENTA">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Principal>
+            <Dependent Role="LEK_KARTA">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LEK_KART_LEK_KARTA_LEK">
+          <End Role="LEK" Type="Self.LEK" Multiplicity="1" />
+          <End Role="LEK_KARTA" Type="Self.LEK_KARTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEK">
+              <PropertyRef Name="ID_LEK" />
+            </Principal>
+            <Dependent Role="LEK_KARTA">
+              <PropertyRef Name="ID_LEK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LEK_RECE_LEK_RECEP_LEK">
+          <End Role="LEK" Type="Self.LEK" Multiplicity="1" />
+          <End Role="LEK_RECEPTA" Type="Self.LEK_RECEPTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEK">
+              <PropertyRef Name="ID_LEK" />
+            </Principal>
+            <Dependent Role="LEK_RECEPTA">
+              <PropertyRef Name="ID_LEK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LEK_RECE_LEK_RECEP_RECEPTA">
+          <End Role="RECEPTA" Type="Self.RECEPTA" Multiplicity="1" />
+          <End Role="LEK_RECEPTA" Type="Self.LEK_RECEPTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECEPTA">
+              <PropertyRef Name="ID_RECEPTA" />
+            </Principal>
+            <Dependent Role="LEK_RECEPTA">
+              <PropertyRef Name="ID_RECEPTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACJENT_PACJENT_K_KARTAPAC">
+          <End Role="KARTAPACJENTA" Type="Self.KARTAPACJENTA" Multiplicity="0..1" />
+          <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KARTAPACJENTA">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Principal>
+            <Dependent Role="PACJENT">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECEPTA_LEKARZ_RE_LEKARZ">
+          <End Role="LEKARZ" Type="Self.LEKARZ" Multiplicity="0..1" />
+          <End Role="RECEPTA" Type="Self.RECEPTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEKARZ">
+              <PropertyRef Name="ID_LEKARZ" />
+            </Principal>
+            <Dependent Role="RECEPTA">
+              <PropertyRef Name="ID_LEKARZ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECEPTA_PACJENT_R_PACJENT">
+          <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="0..1" />
+          <End Role="RECEPTA" Type="Self.RECEPTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACJENT">
+              <PropertyRef Name="ID_PACJENT" />
+            </Principal>
+            <Dependent Role="RECEPTA">
+              <PropertyRef Name="ID_PACJENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIZYTA_LEKARZ_WI_LEKARZ">
+          <End Role="LEKARZ" Type="Self.LEKARZ" Multiplicity="0..1" />
+          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEKARZ">
+              <PropertyRef Name="ID_LEKARZ" />
+            </Principal>
+            <Dependent Role="WIZYTA">
+              <PropertyRef Name="ID_LEKARZ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIZYTA_PACJENRT__PACJENT">
+          <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="0..1" />
+          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACJENT">
+              <PropertyRef Name="ID_PACJENT" />
+            </Principal>
+            <Dependent Role="WIZYTA">
+              <PropertyRef Name="ID_PACJENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIZYTA_WIZYTA_KA_KARTAPAC">
+          <End Role="KARTAPACJENTA" Type="Self.KARTAPACJENTA" Multiplicity="0..1" />
+          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KARTAPACJENTA">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Principal>
+            <Dependent Role="WIZYTA">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PrzychodniaModelStoreContainer">
+          <EntitySet Name="CHOROBY" EntityType="Self.CHOROBY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KARTAPACJENTA" EntityType="Self.KARTAPACJENTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LEK" EntityType="Self.LEK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LEK_KARTA" EntityType="Self.LEK_KARTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LEK_RECEPTA" EntityType="Self.LEK_RECEPTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LEKARZ" EntityType="Self.LEKARZ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PACJENT" EntityType="Self.PACJENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECEPTA" EntityType="Self.RECEPTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WIZYTA" EntityType="Self.WIZYTA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CHOROBY_CHOROBY_W_WIZYTA" Association="Self.FK_CHOROBY_CHOROBY_W_WIZYTA">
+            <End Role="WIZYTA" EntitySet="WIZYTA" />
+            <End Role="CHOROBY" EntitySet="CHOROBY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KARTAPAC_PACJENT_K_PACJENT" Association="Self.FK_KARTAPAC_PACJENT_K_PACJENT">
+            <End Role="PACJENT" EntitySet="PACJENT" />
+            <End Role="KARTAPACJENTA" EntitySet="KARTAPACJENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LEK_KART_LEK_KARTA_KARTAPAC" Association="Self.FK_LEK_KART_LEK_KARTA_KARTAPAC">
+            <End Role="KARTAPACJENTA" EntitySet="KARTAPACJENTA" />
+            <End Role="LEK_KARTA" EntitySet="LEK_KARTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LEK_KART_LEK_KARTA_LEK" Association="Self.FK_LEK_KART_LEK_KARTA_LEK">
+            <End Role="LEK" EntitySet="LEK" />
+            <End Role="LEK_KARTA" EntitySet="LEK_KARTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LEK_RECE_LEK_RECEP_LEK" Association="Self.FK_LEK_RECE_LEK_RECEP_LEK">
+            <End Role="LEK" EntitySet="LEK" />
+            <End Role="LEK_RECEPTA" EntitySet="LEK_RECEPTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LEK_RECE_LEK_RECEP_RECEPTA" Association="Self.FK_LEK_RECE_LEK_RECEP_RECEPTA">
+            <End Role="RECEPTA" EntitySet="RECEPTA" />
+            <End Role="LEK_RECEPTA" EntitySet="LEK_RECEPTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACJENT_PACJENT_K_KARTAPAC" Association="Self.FK_PACJENT_PACJENT_K_KARTAPAC">
+            <End Role="KARTAPACJENTA" EntitySet="KARTAPACJENTA" />
+            <End Role="PACJENT" EntitySet="PACJENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEPTA_LEKARZ_RE_LEKARZ" Association="Self.FK_RECEPTA_LEKARZ_RE_LEKARZ">
+            <End Role="LEKARZ" EntitySet="LEKARZ" />
+            <End Role="RECEPTA" EntitySet="RECEPTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEPTA_PACJENT_R_PACJENT" Association="Self.FK_RECEPTA_PACJENT_R_PACJENT">
+            <End Role="PACJENT" EntitySet="PACJENT" />
+            <End Role="RECEPTA" EntitySet="RECEPTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIZYTA_LEKARZ_WI_LEKARZ" Association="Self.FK_WIZYTA_LEKARZ_WI_LEKARZ">
+            <End Role="LEKARZ" EntitySet="LEKARZ" />
+            <End Role="WIZYTA" EntitySet="WIZYTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIZYTA_PACJENRT__PACJENT" Association="Self.FK_WIZYTA_PACJENRT__PACJENT">
+            <End Role="PACJENT" EntitySet="PACJENT" />
+            <End Role="WIZYTA" EntitySet="WIZYTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIZYTA_WIZYTA_KA_KARTAPAC" Association="Self.FK_WIZYTA_WIZYTA_KA_KARTAPAC">
+            <End Role="KARTAPACJENTA" EntitySet="KARTAPACJENTA" />
+            <End Role="WIZYTA" EntitySet="WIZYTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PrzychodniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CHOROBY">
+          <Key>
+            <PropertyRef Name="ID_CHOROBY" />
+          </Key>
+          <Property Name="ID_CHOROBY" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_WIZYTA" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CHO_NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRZEWLEKLA" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="WIZYTA" Relationship="Self.FK_CHOROBY_CHOROBY_W_WIZYTA" FromRole="CHOROBY" ToRole="WIZYTA" />
+        </EntityType>
+        <EntityType Name="KARTAPACJENTA">
+          <Key>
+            <PropertyRef Name="ID_KARTAPACJENTA" />
+          </Key>
+          <Property Name="ID_KARTAPACJENTA" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACJENT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GRUPAKRWI" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PACJENT" Relationship="Self.FK_KARTAPAC_PACJENT_K_PACJENT" FromRole="KARTAPACJENTA" ToRole="PACJENT" />
+          <NavigationProperty Name="PACJENT1" Relationship="Self.FK_PACJENT_PACJENT_K_KARTAPAC" FromRole="KARTAPACJENTA" ToRole="PACJENT" />
+          <NavigationProperty Name="WIZYTA" Relationship="Self.FK_WIZYTA_WIZYTA_KA_KARTAPAC" FromRole="KARTAPACJENTA" ToRole="WIZYTA" />
+          <NavigationProperty Name="LEK" Relationship="Self.LEK_KARTA" FromRole="KARTAPACJENTA" ToRole="LEK" />
+        </EntityType>
+        <EntityType Name="LEK">
+          <Key>
+            <PropertyRef Name="ID_LEK" />
+          </Key>
+          <Property Name="ID_LEK" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAZWA" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROZMIAR" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="KARTAPACJENTA" Relationship="Self.LEK_KARTA" FromRole="LEK" ToRole="KARTAPACJENTA" />
+          <NavigationProperty Name="RECEPTA" Relationship="Self.LEK_RECEPTA" FromRole="LEK" ToRole="RECEPTA" />
+        </EntityType>
+        <EntityType Name="LEKARZ">
+          <Key>
+            <PropertyRef Name="ID_LEKARZ" />
+          </Key>
+          <Property Name="ID_LEKARZ" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LEK_IMIE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LEK_NAZWISKO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LEK_DATAUR" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LEK_PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LEK_NRTELEFONU" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="LEK_MAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LEK_ADRES" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LEK_HASLO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RECEPTA" Relationship="Self.FK_RECEPTA_LEKARZ_RE_LEKARZ" FromRole="LEKARZ" ToRole="RECEPTA" />
+          <NavigationProperty Name="WIZYTA" Relationship="Self.FK_WIZYTA_LEKARZ_WI_LEKARZ" FromRole="LEKARZ" ToRole="WIZYTA" />
+        </EntityType>
+        <EntityType Name="PACJENT">
+          <Key>
+            <PropertyRef Name="ID_PACJENT" />
+          </Key>
+          <Property Name="ID_PACJENT" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_KARTAPACJENTA" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PAC_IMIE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PAC_NAZWISKO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PAC_DATAUR" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PAC_PESEL" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PAC_NRTELEFONU" Type="Decimal" Precision="9" Scale="0" Nullable="false" />
+          <Property Name="PAC_MAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PAC_ADRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PAC_HASLO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="KARTAPACJENTA" Relationship="Self.FK_KARTAPAC_PACJENT_K_PACJENT" FromRole="PACJENT" ToRole="KARTAPACJENTA" />
+          <NavigationProperty Name="KARTAPACJENTA1" Relationship="Self.FK_PACJENT_PACJENT_K_KARTAPAC" FromRole="PACJENT" ToRole="KARTAPACJENTA" />
+          <NavigationProperty Name="RECEPTA" Relationship="Self.FK_RECEPTA_PACJENT_R_PACJENT" FromRole="PACJENT" ToRole="RECEPTA" />
+          <NavigationProperty Name="WIZYTA" Relationship="Self.FK_WIZYTA_PACJENRT__PACJENT" FromRole="PACJENT" ToRole="WIZYTA" />
+        </EntityType>
+        <EntityType Name="RECEPTA">
+          <Key>
+            <PropertyRef Name="ID_RECEPTA" />
+          </Key>
+          <Property Name="ID_RECEPTA" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_LEKARZ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID_PACJENT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DATAWYSTAWIENIA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="REC_OPIS" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LEKARZ" Relationship="Self.FK_RECEPTA_LEKARZ_RE_LEKARZ" FromRole="RECEPTA" ToRole="LEKARZ" />
+          <NavigationProperty Name="PACJENT" Relationship="Self.FK_RECEPTA_PACJENT_R_PACJENT" FromRole="RECEPTA" ToRole="PACJENT" />
+          <NavigationProperty Name="LEK" Relationship="Self.LEK_RECEPTA" FromRole="RECEPTA" ToRole="LEK" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WIZYTA">
+          <Key>
+            <PropertyRef Name="ID_WIZYTA" />
+          </Key>
+          <Property Name="ID_WIZYTA" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PACJENT" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID_KARTAPACJENTA" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ID_LEKARZ" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DATA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WIZ_OPIS" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CHOROBY" Relationship="Self.FK_CHOROBY_CHOROBY_W_WIZYTA" FromRole="WIZYTA" ToRole="CHOROBY" />
+          <NavigationProperty Name="KARTAPACJENTA" Relationship="Self.FK_WIZYTA_WIZYTA_KA_KARTAPAC" FromRole="WIZYTA" ToRole="KARTAPACJENTA" />
+          <NavigationProperty Name="LEKARZ" Relationship="Self.FK_WIZYTA_LEKARZ_WI_LEKARZ" FromRole="WIZYTA" ToRole="LEKARZ" />
+          <NavigationProperty Name="PACJENT" Relationship="Self.FK_WIZYTA_PACJENRT__PACJENT" FromRole="WIZYTA" ToRole="PACJENT" />
+        </EntityType>
+        <Association Name="FK_CHOROBY_CHOROBY_W_WIZYTA">
+          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="0..1" />
+          <End Role="CHOROBY" Type="Self.CHOROBY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WIZYTA">
+              <PropertyRef Name="ID_WIZYTA" />
+            </Principal>
+            <Dependent Role="CHOROBY">
+              <PropertyRef Name="ID_WIZYTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KARTAPAC_PACJENT_K_PACJENT">
+          <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="0..1" />
+          <End Role="KARTAPACJENTA" Type="Self.KARTAPACJENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACJENT">
+              <PropertyRef Name="ID_PACJENT" />
+            </Principal>
+            <Dependent Role="KARTAPACJENTA">
+              <PropertyRef Name="ID_PACJENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PACJENT_PACJENT_K_KARTAPAC">
+          <End Role="KARTAPACJENTA" Type="Self.KARTAPACJENTA" Multiplicity="0..1" />
+          <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KARTAPACJENTA">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Principal>
+            <Dependent Role="PACJENT">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIZYTA_WIZYTA_KA_KARTAPAC">
+          <End Role="KARTAPACJENTA" Type="Self.KARTAPACJENTA" Multiplicity="0..1" />
+          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KARTAPACJENTA">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Principal>
+            <Dependent Role="WIZYTA">
+              <PropertyRef Name="ID_KARTAPACJENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECEPTA_LEKARZ_RE_LEKARZ">
+          <End Role="LEKARZ" Type="Self.LEKARZ" Multiplicity="0..1" />
+          <End Role="RECEPTA" Type="Self.RECEPTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEKARZ">
+              <PropertyRef Name="ID_LEKARZ" />
+            </Principal>
+            <Dependent Role="RECEPTA">
+              <PropertyRef Name="ID_LEKARZ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIZYTA_LEKARZ_WI_LEKARZ">
+          <End Role="LEKARZ" Type="Self.LEKARZ" Multiplicity="0..1" />
+          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LEKARZ">
+              <PropertyRef Name="ID_LEKARZ" />
+            </Principal>
+            <Dependent Role="WIZYTA">
+              <PropertyRef Name="ID_LEKARZ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECEPTA_PACJENT_R_PACJENT">
+          <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="0..1" />
+          <End Role="RECEPTA" Type="Self.RECEPTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACJENT">
+              <PropertyRef Name="ID_PACJENT" />
+            </Principal>
+            <Dependent Role="RECEPTA">
+              <PropertyRef Name="ID_PACJENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WIZYTA_PACJENRT__PACJENT">
+          <End Role="PACJENT" Type="Self.PACJENT" Multiplicity="0..1" />
+          <End Role="WIZYTA" Type="Self.WIZYTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PACJENT">
+              <PropertyRef Name="ID_PACJENT" />
+            </Principal>
+            <Dependent Role="WIZYTA">
+              <PropertyRef Name="ID_PACJENT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LEK_KARTA">
+          <End Role="KARTAPACJENTA" Type="Self.KARTAPACJENTA" Multiplicity="*" />
+          <End Role="LEK" Type="Self.LEK" Multiplicity="*" />
+        </Association>
+        <Association Name="LEK_RECEPTA">
+          <End Role="LEK" Type="Self.LEK" Multiplicity="*" />
+          <End Role="RECEPTA" Type="Self.RECEPTA" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="PrzychodniaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CHOROBY" EntityType="Self.CHOROBY" />
+          <EntitySet Name="KARTAPACJENTA" EntityType="Self.KARTAPACJENTA" />
+          <EntitySet Name="LEK" EntityType="Self.LEK" />
+          <EntitySet Name="LEKARZ" EntityType="Self.LEKARZ" />
+          <EntitySet Name="PACJENT" EntityType="Self.PACJENT" />
+          <EntitySet Name="RECEPTA" EntityType="Self.RECEPTA" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="WIZYTA" EntityType="Self.WIZYTA" />
+          <AssociationSet Name="FK_CHOROBY_CHOROBY_W_WIZYTA" Association="Self.FK_CHOROBY_CHOROBY_W_WIZYTA">
+            <End Role="WIZYTA" EntitySet="WIZYTA" />
+            <End Role="CHOROBY" EntitySet="CHOROBY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KARTAPAC_PACJENT_K_PACJENT" Association="Self.FK_KARTAPAC_PACJENT_K_PACJENT">
+            <End Role="PACJENT" EntitySet="PACJENT" />
+            <End Role="KARTAPACJENTA" EntitySet="KARTAPACJENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PACJENT_PACJENT_K_KARTAPAC" Association="Self.FK_PACJENT_PACJENT_K_KARTAPAC">
+            <End Role="KARTAPACJENTA" EntitySet="KARTAPACJENTA" />
+            <End Role="PACJENT" EntitySet="PACJENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIZYTA_WIZYTA_KA_KARTAPAC" Association="Self.FK_WIZYTA_WIZYTA_KA_KARTAPAC">
+            <End Role="KARTAPACJENTA" EntitySet="KARTAPACJENTA" />
+            <End Role="WIZYTA" EntitySet="WIZYTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEPTA_LEKARZ_RE_LEKARZ" Association="Self.FK_RECEPTA_LEKARZ_RE_LEKARZ">
+            <End Role="LEKARZ" EntitySet="LEKARZ" />
+            <End Role="RECEPTA" EntitySet="RECEPTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIZYTA_LEKARZ_WI_LEKARZ" Association="Self.FK_WIZYTA_LEKARZ_WI_LEKARZ">
+            <End Role="LEKARZ" EntitySet="LEKARZ" />
+            <End Role="WIZYTA" EntitySet="WIZYTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECEPTA_PACJENT_R_PACJENT" Association="Self.FK_RECEPTA_PACJENT_R_PACJENT">
+            <End Role="PACJENT" EntitySet="PACJENT" />
+            <End Role="RECEPTA" EntitySet="RECEPTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WIZYTA_PACJENRT__PACJENT" Association="Self.FK_WIZYTA_PACJENRT__PACJENT">
+            <End Role="PACJENT" EntitySet="PACJENT" />
+            <End Role="WIZYTA" EntitySet="WIZYTA" />
+          </AssociationSet>
+          <AssociationSet Name="LEK_KARTA" Association="Self.LEK_KARTA">
+            <End Role="KARTAPACJENTA" EntitySet="KARTAPACJENTA" />
+            <End Role="LEK" EntitySet="LEK" />
+          </AssociationSet>
+          <AssociationSet Name="LEK_RECEPTA" Association="Self.LEK_RECEPTA">
+            <End Role="LEK" EntitySet="LEK" />
+            <End Role="RECEPTA" EntitySet="RECEPTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PrzychodniaModelStoreContainer" CdmEntityContainer="PrzychodniaEntities">
+          <EntitySetMapping Name="CHOROBY">
+            <EntityTypeMapping TypeName="PrzychodniaModel.CHOROBY">
+              <MappingFragment StoreEntitySet="CHOROBY">
+                <ScalarProperty Name="ID_CHOROBY" ColumnName="ID_CHOROBY" />
+                <ScalarProperty Name="ID_WIZYTA" ColumnName="ID_WIZYTA" />
+                <ScalarProperty Name="CHO_NAZWA" ColumnName="CHO_NAZWA" />
+                <ScalarProperty Name="PRZEWLEKLA" ColumnName="PRZEWLEKLA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KARTAPACJENTA">
+            <EntityTypeMapping TypeName="PrzychodniaModel.KARTAPACJENTA">
+              <MappingFragment StoreEntitySet="KARTAPACJENTA">
+                <ScalarProperty Name="ID_KARTAPACJENTA" ColumnName="ID_KARTAPACJENTA" />
+                <ScalarProperty Name="ID_PACJENT" ColumnName="ID_PACJENT" />
+                <ScalarProperty Name="GRUPAKRWI" ColumnName="GRUPAKRWI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LEK">
+            <EntityTypeMapping TypeName="PrzychodniaModel.LEK">
+              <MappingFragment StoreEntitySet="LEK">
+                <ScalarProperty Name="ID_LEK" ColumnName="ID_LEK" />
+                <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
+                <ScalarProperty Name="ROZMIAR" ColumnName="ROZMIAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LEKARZ">
+            <EntityTypeMapping TypeName="PrzychodniaModel.LEKARZ">
+              <MappingFragment StoreEntitySet="LEKARZ">
+                <ScalarProperty Name="ID_LEKARZ" ColumnName="ID_LEKARZ" />
+                <ScalarProperty Name="LEK_IMIE" ColumnName="LEK_IMIE" />
+                <ScalarProperty Name="LEK_NAZWISKO" ColumnName="LEK_NAZWISKO" />
+                <ScalarProperty Name="LEK_DATAUR" ColumnName="LEK_DATAUR" />
+                <ScalarProperty Name="LEK_PESEL" ColumnName="LEK_PESEL" />
+                <ScalarProperty Name="LEK_NRTELEFONU" ColumnName="LEK_NRTELEFONU" />
+                <ScalarProperty Name="LEK_MAIL" ColumnName="LEK_MAIL" />
+                <ScalarProperty Name="LEK_ADRES" ColumnName="LEK_ADRES" />
+                <ScalarProperty Name="LEK_HASLO" ColumnName="LEK_HASLO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PACJENT">
+            <EntityTypeMapping TypeName="PrzychodniaModel.PACJENT">
+              <MappingFragment StoreEntitySet="PACJENT">
+                <ScalarProperty Name="ID_PACJENT" ColumnName="ID_PACJENT" />
+                <ScalarProperty Name="ID_KARTAPACJENTA" ColumnName="ID_KARTAPACJENTA" />
+                <ScalarProperty Name="PAC_IMIE" ColumnName="PAC_IMIE" />
+                <ScalarProperty Name="PAC_NAZWISKO" ColumnName="PAC_NAZWISKO" />
+                <ScalarProperty Name="PAC_DATAUR" ColumnName="PAC_DATAUR" />
+                <ScalarProperty Name="PAC_PESEL" ColumnName="PAC_PESEL" />
+                <ScalarProperty Name="PAC_NRTELEFONU" ColumnName="PAC_NRTELEFONU" />
+                <ScalarProperty Name="PAC_MAIL" ColumnName="PAC_MAIL" />
+                <ScalarProperty Name="PAC_ADRES" ColumnName="PAC_ADRES" />
+                <ScalarProperty Name="PAC_HASLO" ColumnName="PAC_HASLO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECEPTA">
+            <EntityTypeMapping TypeName="PrzychodniaModel.RECEPTA">
+              <MappingFragment StoreEntitySet="RECEPTA">
+                <ScalarProperty Name="ID_RECEPTA" ColumnName="ID_RECEPTA" />
+                <ScalarProperty Name="ID_LEKARZ" ColumnName="ID_LEKARZ" />
+                <ScalarProperty Name="ID_PACJENT" ColumnName="ID_PACJENT" />
+                <ScalarProperty Name="DATAWYSTAWIENIA" ColumnName="DATAWYSTAWIENIA" />
+                <ScalarProperty Name="REC_OPIS" ColumnName="REC_OPIS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PrzychodniaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WIZYTA">
+            <EntityTypeMapping TypeName="PrzychodniaModel.WIZYTA">
+              <MappingFragment StoreEntitySet="WIZYTA">
+                <ScalarProperty Name="ID_WIZYTA" ColumnName="ID_WIZYTA" />
+                <ScalarProperty Name="ID_PACJENT" ColumnName="ID_PACJENT" />
+                <ScalarProperty Name="ID_KARTAPACJENTA" ColumnName="ID_KARTAPACJENTA" />
+                <ScalarProperty Name="ID_LEKARZ" ColumnName="ID_LEKARZ" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="WIZ_OPIS" ColumnName="WIZ_OPIS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="LEK_KARTA" TypeName="PrzychodniaModel.LEK_KARTA" StoreEntitySet="LEK_KARTA">
+            <EndProperty Name="KARTAPACJENTA">
+              <ScalarProperty Name="ID_KARTAPACJENTA" ColumnName="ID_KARTAPACJENTA" />
+            </EndProperty>
+            <EndProperty Name="LEK">
+              <ScalarProperty Name="ID_LEK" ColumnName="ID_LEK" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="LEK_RECEPTA" TypeName="PrzychodniaModel.LEK_RECEPTA" StoreEntitySet="LEK_RECEPTA">
+            <EndProperty Name="LEK">
+              <ScalarProperty Name="ID_LEK" ColumnName="ID_LEK" />
+            </EndProperty>
+            <EndProperty Name="RECEPTA">
+              <ScalarProperty Name="ID_RECEPTA" ColumnName="ID_RECEPTA" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
